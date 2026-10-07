@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RETHA REAL ESTATE | Certified Arabian Luxury Properties & 3D Architectural Showcase</title>
+  <meta name="description" content="RETHA REAL ESTATE - Officially certified by the General Real Estate Authority (FAL #1200033904). Discover exclusive villas, sky penthouses, corporate towers, and prime investment land in Riyadh." />
+  <meta name="google" content="notranslate" />
+  
+  <!-- Favicon Monogram -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Google Luxury Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <!-- Ambient Three.js Background Particles Canvas -->
+  <div id="three-ambient-container" class="three-ambient-canvas" aria-hidden="true"></div>
+
+  <!-- FIXED LUXURY GLASS HEADER (TRANSPARENT OVER 3D SCENE) -->
+  <header id="site-global-header" class="site-header-fixed-group">
+    <!-- Top Luxury Announcement & Authority Bar -->
+    <div class="top-authority-bar">
+      <div class="bar-inner">
+        <div class="authority-badge trigger-cert-modal" role="button" tabindex="0">
+          <span class="gold-seal-dot"></span>
+          <span class="authority-text" data-i18n="top_auth_text">
+            <strong class="highlight">Officially Certified</strong> by the General Real Estate Authority (الهيئة العامة للعقار) • FAL #1200033904
+          </span>
+          <span class="verify-chip" data-i18n="top_verify">Verify ↗</span>
+        </div>
+        <div class="top-quick-contacts">
+          <a href="tel:+9660502125573" class="top-contact-item" title="Call RETHA Real Estate: +966 0502125573"><i class="phone-ico">✆</i> +966 0502125573</a>
+          <span class="top-contact-item ar-brand">شركة ريثا العقارية</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Primary Navigation Header -->
+    <nav id="site-header" class="site-nav-header" aria-label="Global Navigation">
+      <div class="nav-container">
+        <!-- Monogram & Logo -->
+        <a href="#hero-scroll-section" class="brand-logo" aria-label="RETHA Real Estate Home">
+          <div class="logo-monogram-box">
+            <span class="monogram-letter">R</span>
+          </div>
+          <div class="logo-text-block">
+            <span class="brand-name">RETHA</span>
+            <span class="brand-tagline" data-i18n="brand_tagline">REAL ESTATE • ريثا العقارية</span>
+          </div>
+        </a>
+
+        <!-- Navigation Links: Visible on desktop, hidden on mobile screens (hidden md:flex) -->
+        <div class="main-nav hidden md:flex">
+          <ul class="nav-menu">
+            <li><a href="#hero-scroll-section" class="nav-link active" data-i18n="nav_vision">The 3D Vision</a></li>
+            <li><a href="#properties-showcase-section" class="nav-link" data-i18n="nav_portfolio">Exclusive Portfolio</a></li>
+            <li><a href="#interactive-map-section" class="nav-link" data-i18n="nav_map">Interactive Map</a></li>
+            <li><a href="#about-us-section" class="nav-link" data-i18n="nav_about">Certification & About</a></li>
+            <li><a href="#why-retha-section" class="nav-link" data-i18n="nav_why">Why RETHA</a></li>
+            <li><a href="#contact-footer" class="nav-link" data-i18n="nav_contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Header Utilities -->
+        <div class="header-actions">
+          <!-- Global Language Switcher (AR / EN) -->
+          <button class="lang-toggle-btn" id="lang-toggle-btn" aria-label="Switch Language (العربية / English)" title="Switch Language (العربية / English)">
+            <span class="lang-icon">🌐</span>
+            <span class="lang-label" id="lang-toggle-label">العربية</span>
+          </button>
+
+          <!-- Theme Toggle (Dark / Light Mode) -->
+          <button class="theme-toggle-btn" aria-label="Switch Theme" title="Toggle Dark/Light Mode">
+            <span class="theme-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </span>
+            <span class="theme-label">Light</span>
+          </button>
+
+          <!-- VIP Private Advisory Consultation Button -->
+          <button class="btn-header-cta" id="header-vip-btn">
+            <span data-i18n="nav_vip_cta">VIP Advisory</span>
+            <span class="btn-arrow">→</span>
+          </button>
+
+          <!-- Mobile Hamburger Menu Button (Three Horizontal Lines) visible only on mobile, strictly hidden on desktop (flex md:hidden) -->
+          <button
+            class="hamburger-menu-btn mobile-menu-btn flex md:hidden text-white"
+            id="mobile-menu-toggle"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-nav-dropdown"
+            type="button"
+          >
+            <span class="hamburger-icon-box">
+              <!-- Three horizontal lines icon -->
+              <svg class="hamburger-three-lines-icon hamburger-two-lines-icon text-white stroke-white" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="4" y1="6" x2="20" y2="6" stroke="currentColor"></line>
+                <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor"></line>
+                <line x1="4" y1="18" x2="20" y2="18" stroke="currentColor"></line>
+              </svg>
+              <!-- Close (X) icon -->
+              <svg class="close-x-icon text-white stroke-white" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: none;">
+                <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor"></line>
+                <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor"></line>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown / Slide-out Menu -->
+      <div id="mobile-nav-dropdown" class="mobile-nav-dropdown" aria-hidden="true">
+        <div class="mobile-nav-inner">
+          <div class="mobile-nav-lang-bar">
+            <button class="lang-toggle-btn mobile-lang-btn" id="mobile-lang-toggle-btn" aria-label="Switch Language (العربية / English)">
+              <span class="lang-icon">🌐</span>
+              <span class="lang-label">العربية</span>
+            </button>
+          </div>
+          <ul class="mobile-nav-menu">
+            <li><a href="#hero-scroll-section" class="mobile-nav-link active"><span class="link-idx">01</span><span class="link-txt" data-i18n="nav_vision">The 3D Vision</span></a></li>
+            <li><a href="#properties-showcase-section" class="mobile-nav-link"><span class="link-idx">02</span><span class="link-txt" data-i18n="nav_portfolio">Exclusive Portfolio</span></a></li>
+            <li><a href="#interactive-map-section" class="mobile-nav-link"><span class="link-idx">03</span><span class="link-txt" data-i18n="nav_map">Interactive Map</span></a></li>
+            <li><a href="#about-us-section" class="mobile-nav-link"><span class="link-idx">04</span><span class="link-txt" data-i18n="nav_about">Certification & About</span></a></li>
+            <li><a href="#why-retha-section" class="mobile-nav-link"><span class="link-idx">05</span><span class="link-txt" data-i18n="nav_why">Why RETHA</span></a></li>
+            <li><a href="#contact-footer" class="mobile-nav-link"><span class="link-idx">06</span><span class="link-txt" data-i18n="nav_contact">Contact</span></a></li>
+          </ul>
+          <div class="mobile-nav-footer">
+            <button class="mobile-vip-cta trigger-schedule-modal" type="button">
+              <span data-i18n="mobile_vip_cta">VIP Private Acquisition Advisory</span>
+              <span class="btn-arrow">→</span>
+            </button>
+            <div class="mobile-nav-contact-meta">
+              <a href="tel:+9660502125573" class="mobile-contact-phone" title="Call RETHA Real Estate: +966 0502125573">✆ +966 0502125573</a>
+              <span class="mobile-contact-brand ar-brand">شركة ريثا العقارية</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main>
+
+    <!-- SECTION 1: HERO SECTION & 3D SCROLL CINEMATIC EXPERIENCE -->
+    <section id="hero-scroll-section" class="hero-3d-scroll-runway">
+      
+      <!-- Sticky Canvas Container -->
+      <div class="hero-canvas-sticky-wrap">
+        <canvas id="hero-canvas"></canvas>
+
+        <!-- Preloader for 3D Sequence -->
+        <div id="hero-loader" class="hero-asset-loader">
+          <div class="loader-content">
+            <div class="luxury-spinner">
+              <span class="spinner-ring"></span>
+              <span class="spinner-emblem">⚜</span>
+            </div>
+            <div class="loader-text-group">
+              <span class="loader-title" data-i18n="hero_calibrating">CALIBRATING 3D CINEMATIC EXPERIENCE</span>
+              <span class="loader-sub" data-i18n="hero_materializing">Materializing Architecture • High Dynamic Range</span>
+            </div>
+            <div class="progress-track">
+              <div id="hero-preload-bar" class="progress-bar-fill"></div>
+            </div>
+            <span id="hero-preload-text" class="progress-pct">0%</span>
+          </div>
+        </div>
+
+        <!-- Vertical Scrubber & Milestone Navigation HUD -->
+        <aside class="hero-scrubber-hud" aria-label="3D Scrubber Timeline">
+          <div class="scrubber-track-line">
+            <div class="scrubber-track-fill"></div>
+          </div>
+          <div class="milestones-list">
+            <button class="milestone-btn active" data-progress="0.0" data-next-progress="0.99">
+              <span class="m-dot"></span>
+              <span class="m-text" data-i18n="scrubber_01">01 3D Assembly</span>
+            </button>
+            <button class="milestone-btn" data-progress="1.0" data-next-progress="1.0">
+              <span class="m-dot"></span>
+              <span class="m-text" data-i18n="scrubber_02">02 Completed Estate</span>
+            </button>
+          </div>
+        </aside>
+
+        <!-- Story Chapters (Overlay over sticky canvas) -->
+        <div class="hero-story-overlays-container">
+          
+          <!-- MINIMALIST CORNER METADATA (Replaces large centered text) -->
+          <div class="hero-story-chapter chapter-minimal-corner active" data-start="0.0" data-end="0.10">
+            <div class="minimal-corner-capsule">
+              <div class="minimal-badge-row">
+                <span class="minimal-seal-dot"></span>
+                <span class="minimal-kicker" data-i18n="hero_dossier_kicker">RETHA ARCHITECTURAL DOSSIER</span>
+                <span class="minimal-cert-pill trigger-cert-modal" data-i18n="hero_fal_pill">FAL #1200033904</span>
+              </div>
+              <h1 class="minimal-title" data-i18n="hero_estate_title">Villa Al-Malqa Materialization</h1>
+              <p class="minimal-meta" data-i18n="hero_estate_meta">هندسة الأجيال ثلاثية الأبعاد • قطعة أرض مساحتها 960 مترًا مربعًا • شمال الرياض</p>
+            </div>
+
+            <!-- Subtle Bottom Scroll Cue -->
+            <div class="hero-minimal-scroll-cue">
+              <span class="cue-indicator-bar"></span>
+              <span class="cue-text" data-i18n="hero_scroll_cue">SCROLL TO BUILD 3D ARCHITECTURE ↓</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: PROPERTY SHOWCASE & ADVANCED FILTERING SYSTEM -->
+    <section id="properties-showcase-section" class="luxury-section property-showcase-wrap">
+      <div class="section-container">
+        
+        <!-- Section Header -->
+        <div class="section-header-centered">
+          <div class="section-tag-pill">
+            <span class="gold-star">◆</span> <span data-i18n="showcase_tag">EXCLUSIVE PROPERTY SHOWCASE</span> <span class="gold-star">◆</span>
+          </div>
+          <h2 class="section-main-heading" data-i18n="showcase_heading">CURATED RESIDENTIAL & INVESTMENT ASSETS</h2>
+          <p class="section-arabic-heading" data-i18n="showcase_sub_ar">مجموعة العقارات الحصرية المعتمدة رسمياً من الهيئة العامة للعقار</p>
+          <p class="section-subtext" data-i18n="showcase_desc">
+            Every listing has been authenticated with official electronic title deeds, municipal building permits, and Fal-licensed brokerage representation.
+          </p>
+        </div>
+
+        <!-- Advanced Filter & Search Console -->
+        <div class="advanced-filter-console">
+          
+          <!-- Top Row: Search & Category Pills -->
+          <div class="filter-top-row">
+            <div class="search-input-box">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="property-search-input" data-i18n-placeholder="search_placeholder" placeholder="Search by district, neighborhood, villa, or landmark..." />
+            </div>
+
+            <!-- Category Pills -->
+            <div class="category-pills-list">
+              <button class="category-filter-pill active" data-category="all" data-i18n="cat_all">All Portfolios</button>
+              <button class="category-filter-pill" data-category="villa" data-i18n="cat_villa">Exclusive Villas</button>
+              <button class="category-filter-pill" data-category="apartment" data-i18n="cat_apartment">Sky Penthouses</button>
+              <button class="category-filter-pill" data-category="office" data-i18n="cat_office">Corporate Towers</button>
+              <button class="category-filter-pill" data-category="land" data-i18n="cat_land">Investment Land</button>
+            </div>
+          </div>
+
+          <!-- Bottom Row: Price Slider & Currency Toggle -->
+          <div class="filter-bottom-row">
+            <div class="price-slider-group">
+              <div class="slider-label-row">
+                <span class="slider-title" data-i18n="price_threshold_label">Maximum Price Threshold:</span>
+                <span id="price-range-display" class="slider-value">Up to SAR 150M</span>
+              </div>
+              <input type="range" id="price-range-slider" min="10000000" max="150000000" step="5000000" value="150000000" />
+            </div>
+
+            <div class="filter-controls-group">
+              <button id="currency-toggle-btn" class="filter-ctrl-btn">Currency: SAR</button>
+              <button id="reset-filters-btn" class="filter-ctrl-btn outline" data-i18n="btn_reset_filters">Reset Filters</button>
+              <div id="results-counter-badge" class="results-badge">Showing 6 of 6 Verified Assets</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 3D Motion Property Grid -->
+        <div id="properties-grid" class="properties-3d-grid">
+          <!-- Populated dynamically by PropertyShowcase component -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: INTERACTIVE PROPERTY MAP -->
+    <section id="interactive-map-section" class="luxury-section interactive-map-wrap">
+      <div class="section-container">
+        
+        <div class="section-header-row">
+          <div>
+            <div class="section-tag-pill">
+              <span class="gold-star">◆</span> <span data-i18n="map_tag">GEOGRAPHIC COVERAGE</span> <span class="gold-star">◆</span>
+            </div>
+            <h2 class="section-main-heading" data-i18n="map_heading">RIYADH PRIME REAL ESTATE MAP</h2>
+            <p class="section-arabic-heading" data-i18n="map_sub_ar">استكشف مواقع العقارات في أرقى أحياء العاصمة الرياض</p>
+          </div>
+          <div class="map-category-filter-pills">
+            <button class="map-filter-pill active" data-category="all" data-i18n="map_filter_all">All Locations</button>
+            <button class="map-filter-pill" data-category="villa" data-i18n="map_filter_villas">Villas</button>
+            <button class="map-filter-pill" data-category="apartment" data-i18n="map_filter_penthouses">Penthouses</button>
+            <button class="map-filter-pill" data-category="office" data-i18n="map_filter_offices">Offices</button>
+            <button class="map-filter-pill" data-category="land" data-i18n="map_filter_land">Land</button>
+          </div>
+        </div>
+
+        <!-- Smart Neighborhood Search & Dropdown Filter -->
+        <div class="map-district-filter-bar">
+          <div class="district-filter-header">
+            <span class="focus-title"><span class="pin-marker-gold">📍</span> <span data-i18n="map_focus_label">Focus Neighborhood:</span></span>
+            <span class="district-count-pill" id="map-district-count-badge">5 Active Districts</span>
+          </div>
+
+          <div class="district-dropdown-container" id="map-district-dropdown">
+            <div class="district-select-trigger" id="map-district-trigger" tabindex="0" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-label="Select or Search Riyadh Neighborhood">
+              <span class="district-select-icon">📍</span>
+              <span class="district-select-value" id="map-selected-district-label" data-i18n="map_all_districts_label">All Riyadh Districts (جميع الأحياء)</span>
+              <button type="button" class="district-clear-btn" id="map-district-clear" title="Reset to all districts" aria-label="Reset selection" style="display: none;">✕</button>
+              <span class="district-chevron">▾</span>
+            </div>
+
+            <div class="district-dropdown-menu" id="map-district-menu" role="listbox" aria-label="Riyadh Neighborhoods">
+              <div class="district-search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="district-search-input" id="map-district-search" data-i18n-placeholder="map_district_search_ph" placeholder="Search neighborhood... (ابحث عن حي)" autocomplete="off" />
+                <button type="button" class="district-search-clear" id="map-search-clear" style="display: none;">✕</button>
+              </div>
+
+              <div class="district-options-list" id="map-district-options">
+                <!-- Dynamically populated from active properties -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Map Frame -->
+        <div class="map-display-wrapper">
+          <div id="luxury-interactive-map" class="luxury-map-canvas"></div>
+          <div class="map-watermark-overlay">
+            <span class="watermark-logo">RETHA</span>
+            <span class="watermark-sub" data-i18n="map_watermark_sub">Certified Geographic Intelligence</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: ABOUT US & OFFICIAL CERTIFICATION -->
+    <section id="about-us-section" class="luxury-section about-us-wrap">
+      <div class="section-container">
+        
+        <div class="about-grid">
+          
+          <!-- Left Column: Official Crest & Falcon Seal -->
+          <div class="about-cert-box">
+            <div class="cert-gold-card trigger-cert-modal" role="button" tabindex="0">
+              <div class="card-glow-reflection"></div>
+              <div class="official-crest-header">
+                <div class="crest-svg-icon">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"></path>
+                    <path d="M9 12l2 2 4-4"></path>
+                  </svg>
+                </div>
+                <div class="crest-header-text">
+                  <span class="gov-title" data-i18n="about_gov_title">GENERAL REAL ESTATE AUTHORITY</span>
+                  <span class="gov-ar" data-i18n="about_gov_ar">الهيئة العامة للعقار • المملكة العربية السعودية</span>
+                </div>
+              </div>
+
+              <div class="cert-details-block">
+                <div class="cert-line">
+                  <span class="lbl">FAL (المؤسسة - ريثا للتسويق العقاري):</span>
+                  <span class="val highlight">1200033904</span>
+                </div>
+                <div class="cert-line">
+                  <span class="lbl">FAL (شخصي / Individual License):</span>
+                  <span class="val highlight">800276728</span>
+                </div>
+                <div class="cert-line">
+                  <span class="lbl">ترخيص إعلامي موثوق (Verified Media License):</span>
+                  <span class="val highlight">488026</span>
+                </div>
+                <div class="cert-line">
+                  <span class="lbl">رقم المنشأة / السجل التجاري:</span>
+                  <span class="val highlight cert-cr-val">1009185358</span>
+                </div>
+                <div class="cert-line">
+                  <span class="lbl">الرقم الموحد / السجل التجاري:</span>
+                  <span class="val highlight cert-unified-val">7043643878</span>
+                </div>
+                <div class="cert-line">
+                  <span class="lbl">الحالة النظامية (Status):</span>
+                  <span class="val status-green">● مرخص ونشط رسمياً • Active & Verified</span>
+                </div>
+              </div>
+
+              <div class="cert-card-footer">
+                <div class="qr-mockup">
+                  <div class="qr-pattern"></div>
+                  <span class="qr-text">Scan for REGA Registry</span>
+                </div>
+                <button class="btn-cert-verify trigger-cert-modal" type="button">
+                  <span data-i18n="about_view_cert_btn">View Official Certificate (FAL #1200033904)</span>
+                  <span class="btn-arrow">↗</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Editorial Agency Overview -->
+          <div class="about-editorial-box">
+            <div class="section-tag-pill">
+              <span class="gold-star">◆</span> <span data-i18n="about_tag">ACCREDITED PRESTIGE</span> <span class="gold-star">◆</span>
+            </div>
+            <h2 class="section-main-heading" data-i18n="about_heading">REDEFINING THE STANDARD OF ARABIAN REAL ESTATE</h2>
+            <p class="section-arabic-heading" data-i18n="about_sub_ar">ريثا العقارية • وسيطكم المعتمد لأرقى الصروح والصفقات العقارية</p>
+            
+            <p class="about-text-lead" data-i18n="about_lead">
+              Founded on the bedrock of institutional transparency and bespoke advisory, <strong>RETHA REAL ESTATE</strong> operates as an elite boutique agency officially licensed and accredited by the General Real Estate Authority in the Kingdom of Saudi Arabia.
+            </p>
+
+            <p class="about-text-body" data-i18n="about_body">
+              We cater exclusively to sovereign entities, royal families, private family offices, and discerning institutional investors seeking off-market palaces, trophy residential compounds, and high-yield commercial developments across the Kingdom. In harmony with Saudi Vision 2030, we pair uncompromising regulatory compliance with world-class architectural discernment.
+            </p>
+
+            <div class="about-signature-row">
+              <div class="sig-block">
+                <span class="sig-name" data-i18n="about_sig_name">Eng. Sultan Al-Otaibi</span>
+                <span class="sig-title" data-i18n="about_sig_title">Managing Partner & Fal Certified Broker</span>
+              </div>
+              <div class="stamp-emblem">
+                <span>RETHA</span>
+                <small data-i18n="about_seal_text">SEAL OF AUTHENTICITY</small>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5: WHY RETHA? (4 PILLARS) -->
+    <section id="why-retha-section" class="luxury-section why-retha-wrap">
+      <div class="section-container">
+        
+        <div class="section-header-centered">
+          <div class="section-tag-pill">
+            <span class="gold-star">◆</span> <span data-i18n="why_tag">THE RETHA ADVANTAGE</span> <span class="gold-star">◆</span>
+          </div>
+          <h2 class="section-main-heading" data-i18n="why_heading">WHY DISCERNING CLIENTS CHOOSE RETHA</h2>
+          <p class="section-arabic-heading" data-i18n="why_sub_ar">ركائز الثقة والاحترافية والاعتماد الرسمي</p>
+        </div>
+
+        <div class="why-pillars-grid">
+          
+          <div class="pillar-card">
+            <div class="pillar-number">01</div>
+            <div class="pillar-icon">🏛</div>
+            <h3 class="pillar-title" data-i18n="pillar_1_title">Official Authority Accreditation</h3>
+            <p class="pillar-desc" data-i18n="pillar_1_desc">
+              Every asset is audited through the General Real Estate Authority's registry. We ensure valid electronic deeds (صكوك إلكترونية), clear legal provenance, and zero regulatory encumbrance.
+            </p>
+            <div class="pillar-feature" data-i18n="pillar_1_feat">✓ FAL License #1200033904</div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-number">02</div>
+            <div class="pillar-icon">🗝</div>
+            <h3 class="pillar-title" data-i18n="pillar_2_title">Exclusive Off-Market Access</h3>
+            <p class="pillar-desc" data-i18n="pillar_2_desc">
+              Over 60% of our ultra-luxury transactions occur entirely off-market. We unlock private listings that never surface on public portals, ensuring absolute discreetness for buyers and sellers.
+            </p>
+            <div class="pillar-feature" data-i18n="pillar_2_feat">✓ Confidential VIP Portfolios</div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-number">03</div>
+            <div class="pillar-icon">⚖</div>
+            <h3 class="pillar-title" data-i18n="pillar_3_title">Discreet HNW Advisory</h3>
+            <p class="pillar-desc" data-i18n="pillar_3_desc">
+              Bespoke representation tailored for family offices and diplomats. From non-disclosure agreements to confidential site inspections with private chauffeur logistics.
+            </p>
+            <div class="pillar-feature" data-i18n="pillar_3_feat">✓ Strict NDA Confidentiality</div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-number">04</div>
+            <div class="pillar-icon">📜</div>
+            <h3 class="pillar-title" data-i18n="pillar_4_title">Turnkey Legal & Title Conveyance</h3>
+            <p class="pillar-desc" data-i18n="pillar_4_desc">
+              Our in-house legal and valuation team handles the entire transaction lifecycle: purchase contracts, escrow coordination, tax structuring (RETT compliance), and instant electronic deed transfer.
+            </p>
+            <div class="pillar-feature" data-i18n="pillar_4_feat">✓ Escrow & Conveyance Support</div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 6: ANIMATED STATISTICS SECTION -->
+    <section id="statistics-section" class="luxury-section statistics-wrap">
+      <div class="section-container">
+        <div class="stats-grid">
+          
+          <div class="stat-card">
+            <div class="stat-number-animated" data-target="9" data-suffix="+" data-decimals="0">0</div>
+            <div class="stat-label" data-i18n="stat_years_label">Years of Curated Excellence</div>
+            <div class="stat-sub">سنوات من الريادة والتميز</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-number-animated" data-target="4.8" data-prefix="SAR " data-suffix="B+" data-decimals="1">0</div>
+            <div class="stat-label" data-i18n="stat_transacted_label">Total Real Estate Transacted</div>
+            <div class="stat-sub">إجمالي قيمة الصفقات المنفذة</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-number-animated" data-target="240" data-suffix="+" data-decimals="0">0</div>
+            <div class="stat-label" data-i18n="stat_portfolios_label">Certified Luxury Portfolios</div>
+            <div class="stat-sub">عقارات فاخرة معتمدة رسمياً</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-number-animated" data-target="99.4" data-suffix="%" data-decimals="1">0</div>
+            <div class="stat-label" data-i18n="stat_satisfaction_label">Client Confidentiality & Satisfaction</div>
+            <div class="stat-sub">نسبة رضا العملاء والسرية التامة</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: CLIENT TESTIMONIALS -->
+    <section id="testimonials-section" class="luxury-section testimonials-wrap">
+      <div class="section-container">
+        
+        <div class="section-header-centered">
+          <div class="section-tag-pill">
+            <span class="gold-star">◆</span> <span data-i18n="testim_tag">CLIENT ENDORSEMENTS</span> <span class="gold-star">◆</span>
+          </div>
+          <h2 class="section-main-heading" data-i18n="testim_heading">TRUSTED BY INDUSTRY TITANS & FAMILY OFFICES</h2>
+          <p class="section-arabic-heading" data-i18n="testim_sub_ar">شهادات عملائنا من كبار المستثمرين والدبلوماسيين</p>
+        </div>
+
+        <div class="testimonials-cards-grid">
+          
+          <div class="testimonial-card">
+            <div class="quote-stars">★★★★★</div>
+            <p class="testimonial-quote" data-i18n="testim_quote_1">
+              "The level of discretion and regulatory rigor exhibited by RETHA is without equal in Saudi Arabia. They secured our family office an off-market compound in Al-Hada with complete title authentication within two weeks."
+            </p>
+            <div class="client-meta">
+              <div class="client-avatar">FA</div>
+              <div>
+                <h4 class="client-name" data-i18n="testim_client_1">Fahad Al-Dakhil</h4>
+                <p class="client-role" data-i18n="testim_role_1">Managing Director, Private Family Office • Riyadh</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card featured-testimonial">
+            <div class="quote-stars">★★★★★</div>
+            <p class="testimonial-quote" data-i18n="testim_quote_2">
+              "As an international institutional fund entering the Kingdom, working with an agency officially certified by the General Real Estate Authority was non-negotiable. RETHA's team handled our prime KAFD acquisition flawlessly."
+            </p>
+            <div class="client-meta">
+              <div class="client-avatar gold">AM</div>
+              <div>
+                <h4 class="client-name" data-i18n="testim_client_2">Alexander Montgomery</h4>
+                <p class="client-role" data-i18n="testim_role_2">Partner, Sovereign Real Estate Partners (Geneva / Riyadh)</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="quote-stars">★★★★★</div>
+            <p class="testimonial-quote" data-i18n="testim_quote_3">
+              "The 3D presentation, drone analysis, and comprehensive architectural breakdown made selecting our primary residence in Al-Malqa an effortless decision. Truly the gold standard of real estate."
+            </p>
+            <div class="client-meta">
+              <div class="client-avatar">NS</div>
+              <div>
+                <h4 class="client-name" data-i18n="testim_client_3">Dr. Noura Al-Saud</h4>
+                <p class="client-role" data-i18n="testim_role_3">Private Investor & Architectural Patron</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- LUXURY FOOTER -->
+  <footer id="contact-footer" class="site-footer">
+    <div class="section-container">
+      
+      <div class="footer-top-grid">
+        
+        <!-- Brand & Certification Summary -->
+        <div class="footer-col brand-col">
+          <div class="footer-logo">
+            <div class="logo-monogram-box small">
+              <span class="monogram-letter">R</span>
+            </div>
+            <div class="logo-text-block">
+              <span class="brand-name">RETHA</span>
+              <span class="brand-tagline">REAL ESTATE • ريثا العقارية</span>
+            </div>
+          </div>
+          <p class="footer-bio">
+            Officially certified by the Saudi General Real Estate Authority (الهيئة العامة للعقار). Providing ultra-luxury residential and commercial brokerage, off-market portfolio curation, and sovereign advisory across Riyadh.
+          </p>
+          <div class="footer-cert-badge trigger-cert-modal" role="button" tabindex="0">
+            <span class="cert-tick">✓</span>
+            <span>REGA FAL License #1200033904 • Unified CR #7043643878</span>
+          </div>
+        </div>
+
+        <!-- Quick Navigation -->
+        <div class="footer-col">
+          <h4 class="footer-heading" data-i18n="footer_heading_portfolios">Portfolios</h4>
+          <ul class="footer-links">
+            <li class="footer-static-item" data-i18n="footer_item_p1">Exclusive Palaces & Villas</li>
+            <li class="footer-static-item" data-i18n="footer_item_p2">KAFD Sky Penthouses</li>
+            <li class="footer-static-item" data-i18n="footer_item_p3">Grade-A Corporate Towers</li>
+            <li class="footer-static-item" data-i18n="footer_item_p4">King Salman Investment Land</li>
+            <li class="footer-static-item" data-i18n="footer_item_p5">3D Architectural Experience</li>
+          </ul>
+        </div>
+
+        <!-- Districts Coverage -->
+        <div class="footer-col">
+          <h4 class="footer-heading" data-i18n="footer_heading_districts">Prime Districts</h4>
+          <ul class="footer-links">
+            <li class="footer-static-item" data-i18n="footer_item_d1">Al-Malqa Residences</li>
+            <li class="footer-static-item" data-i18n="footer_item_d2">Hittin Architectural District</li>
+            <li class="footer-static-item" data-i18n="footer_item_d3">Al-Hada Diplomatic Enclave</li>
+            <li class="footer-static-item" data-i18n="footer_item_d4">King Abdullah Financial District</li>
+            <li class="footer-static-item" data-i18n="footer_item_d5">Al-Nakheel Prestige Villas</li>
+          </ul>
+        </div>
+
+        <!-- Direct Contact Details & Social Media -->
+        <div class="footer-col">
+          <h4 class="footer-heading" data-i18n="footer_heading_contact">Headquarters & Inquiries</h4>
+          <ul class="footer-contact-info">
+            <li>
+              <span class="icon">📍</span>
+              <span data-i18n="footer_address">الرياض، المملكة العربية السعودية (Riyadh, Saudi Arabia)</span>
+            </li>
+            <li>
+              <span class="icon">✆</span>
+              <span>
+                WhatsApp / Tel:
+                <a href="https://wa.me/966502125573" target="_blank" rel="noopener noreferrer" class="footer-contact-link" title="WhatsApp Line 1 (+966 50 212 5573)">+966 50 212 5573</a>
+                <span class="contact-sep">•</span>
+                <a href="https://wa.me/966554389151" target="_blank" rel="noopener noreferrer" class="footer-contact-link" title="WhatsApp Line 2 (+966 55 438 9151)">+966 55 438 9151</a>
+              </span>
+            </li>
+            <li>
+              <span class="icon">✉</span>
+              <span><span data-i18n="footer_inquiries_prefix">Inquiries:</span> <a href="mailto:aqar.88riyadh@gmail.com" class="footer-contact-link" title="Send email to aqar.88riyadh@gmail.com">aqar.88riyadh@gmail.com</a></span>
+            </li>
+          </ul>
+
+          <!-- Official Social Media & Contact Channels: WhatsApp 1, WhatsApp 2, Instagram, TikTok, Email -->
+          <div class="footer-socials-group">
+            <!-- WhatsApp 1 -->
+            <a href="https://wa.me/966502125573" target="_blank" rel="noopener noreferrer" class="social-icon-btn wa" aria-label="WhatsApp Line 1 (+966 50 212 5573)" title="WhatsApp Line 1: +966 50 212 5573">
+              <span class="social-badge">1</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            </a>
+
+            <!-- WhatsApp 2 -->
+            <a href="https://wa.me/966554389151" target="_blank" rel="noopener noreferrer" class="social-icon-btn wa" aria-label="WhatsApp Line 2 (+966 55 438 9151)" title="WhatsApp Line 2: +966 55 438 9151">
+              <span class="social-badge">2</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/aqar__88?stkn=NXY0OTFhYWg0emNk" target="_blank" rel="noopener noreferrer" class="social-icon-btn ig" aria-label="Instagram (@aqar__88)" title="Instagram: @aqar__88">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@aqar_88?_r=1&_t=ZS-9195PPV0MoE" target="_blank" rel="noopener noreferrer" class="social-icon-btn tt" aria-label="TikTok (@aqar_88)" title="TikTok: @aqar_88">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-1.01v8.83c-.02 1.93-.65 3.86-1.89 5.34-1.57 1.9-3.9 3.04-6.36 3.02-2.93-.05-5.69-1.63-7.05-4.2-1.39-2.58-1.27-5.83.3-8.28 1.54-2.43 4.29-3.88 7.18-3.72v4.06c-1.38-.1-2.8.44-3.64 1.54-.87 1.11-1.03 2.67-.4 3.92.62 1.27 1.96 2.07 3.39 2.03 1.48-.03 2.85-.92 3.35-2.31.24-.65.34-1.35.34-2.05V.02z"/></svg>
+            </a>
+
+            <!-- Email (without target="_blank" so it natively opens the user's default email app) -->
+            <a href="mailto:aqar.88riyadh@gmail.com" class="social-icon-btn mail" aria-label="Email Us (aqar.88riyadh@gmail.com)" title="Email: aqar.88riyadh@gmail.com">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <p class="copyright-text" data-i18n="footer_copyright">
+          © 2026 RETHA REAL ESTATE (شركة ريثا العقارية). All Rights Reserved. Regulated and Certified by the Saudi General Real Estate Authority under FAL Brokerage License #1200033904.
+        </p>
+        <div class="footer-legal-links">
+          <button type="button" class="legal-link trigger-cert-modal" data-i18n="footer_license_link">License Verification</button>
+          <span class="sep">•</span>
+          <button type="button" class="legal-link trigger-privacy-modal" data-i18n="footer_privacy_link">Privacy Policy</button>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+
+
+
+  <!-- MODAL 1: INTERACTIVE PROPERTY DETAIL MODAL (360 TOUR & MULTI-VIEW) -->
+  <div id="property-detail-modal" class="luxury-modal" role="dialog" aria-modal="true" aria-label="Property Detail Inspection">
+    <div class="modal-backdrop"></div>
+    <div class="modal-inner-container max-w-5xl mx-auto w-full">
+      <!-- Populated dynamically by PropertyModal class -->
+    </div>
+  </div>
+
+  <!-- MODAL 1B: STANDALONE PROPERTY ACQUISITION INQUIRY MODAL (EXACT REPLICA OF DOSSIER FORM) -->
+  <div id="property-inquiry-modal" class="luxury-modal" role="dialog" aria-modal="true" aria-label="Property Acquisition Inquiry">
+    <div class="modal-backdrop inq-modal-close-trigger"></div>
+    <div class="modal-card-dialog property-inquiry-dialog">
+      <!-- Populated dynamically by PropertyModal.openInquiryModal(prop) -->
+    </div>
+  </div>
+
+  <!-- MODAL 2: OFFICIAL REGA CERTIFICATION AUTHENTICATION DIALOG -->
+  <div id="certification-modal" class="luxury-modal items-start overflow-y-auto py-8 sm:py-12" role="dialog" aria-modal="true" aria-label="Official Authority Certification">
+    <div class="modal-backdrop cert-modal-close"></div>
+    <div class="modal-card-dialog max-h-[90vh] overflow-y-auto my-auto">
+      <button class="modal-close-icon cert-modal-close" aria-label="Close modal">&times;</button>
+      
+      <div class="cert-modal-header">
+        <div class="saudi-crest-large">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+          </svg>
+        </div>
+        <h3 data-i18n="modal_cert_title">OFFICIAL ACCREDITATION CERTIFICATE</h3>
+        <p class="ar-cert-title" data-i18n="modal_cert_ar_title">شهادة تسجيل وترخيص رسمي من الهيئة العامة للعقار</p>
+      </div>
+
+      <div class="cert-modal-body">
+        <div class="cert-verification-seal">
+          <span class="seal-icon-svg">⚜</span>
+          <div class="seal-status-text">
+            <h4 data-i18n="modal_cert_verified_h4">OFFICIALLY VERIFIED & ACTIVE</h4>
+            <span class="timestamp" data-i18n="modal_cert_verified_sub">Live Verification with REGA National Registry</span>
+          </div>
+        </div>
+
+        <div class="cert-table">
+          <div class="cert-row">
+            <span class="k">المنشأة المرخصة (Licensed Entity):</span>
+            <span class="v">مؤسسة ريثا للتسويق العقاري (RETHA Real Estate Marketing)</span>
+          </div>
+          <div class="cert-row">
+            <span class="k">جهة الاعتماد (Authority):</span>
+            <span class="v">الهيئة العامة للعقار (General Real Estate Authority)</span>
+          </div>
+          <div class="cert-row">
+            <span class="k">FAL (المؤسسة - ريثا للتسويق العقاري):</span>
+            <span class="v highlight">1200033904</span>
+          </div>
+          <div class="cert-row">
+            <span class="k">FAL (شخصي / Individual License):</span>
+            <span class="v highlight">800276728</span>
+          </div>
+          <div class="cert-row">
+            <span class="k">ترخيص إعلامي موثوق (Verified Media License):</span>
+            <span class="v highlight">488026</span>
+          </div>
+          <div class="cert-row">
+            <span class="k">رقم المنشأة / السجل التجاري:</span>
+            <span class="v">1009185358</span>
+          </div>
+          <div class="cert-row">
+            <span class="k">الرقم الموحد / السجل التجاري:</span>
+            <span class="v">7043643878</span>
+          </div>
+          <div class="cert-row">
+            <span class="k">التكامل مع الصكوك الإلكترونية (Najiz):</span>
+            <span class="v">Direct Ministry of Justice (Najiz) Electronic Verification</span>
+          </div>
+          <div class="cert-row">
+            <span class="k">الامتثال لحسابات الضمان وافي (Wafi):</span>
+            <span class="v">100% Certified Off-Plan & Escrow Protection</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-modal-footer">
+        <a href="https://eservices.rega.gov.sa" target="_blank" rel="noopener noreferrer" class="btn-primary-luxury">
+          <span data-i18n="modal_cert_btn_portal">Verify on Official REGA Portal</span>
+          <span class="btn-arrow">↗</span>
+        </a>
+        <button class="btn-secondary-luxury cert-modal-close" data-i18n="modal_cert_btn_close">Close Verification</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2B: PRIVACY POLICY & CLIENT DATA PROTECTION DIALOG -->
+  <div id="privacy-policy-modal" class="luxury-modal" role="dialog" aria-modal="true" aria-label="Privacy Policy & Client Data Protection">
+    <div class="modal-backdrop privacy-modal-close"></div>
+    <div class="modal-card-dialog legal-policy-dialog">
+      <button class="modal-close-icon privacy-modal-close" aria-label="Close modal">&times;</button>
+      
+      <div class="cert-modal-header">
+        <div class="saudi-crest-large">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.54-3.13 8.79-7 9.82-3.87-1.03-7-5.28-7-9.82V6.3l7-3.12zM12 7a2 2 0 0 0-2 2v2h-1a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1h-1V9a2 2 0 0 0-2-2zm-1 4V9a1 1 0 1 1 2 0v2h-2z"/>
+          </svg>
+        </div>
+        <h3 data-i18n="modal_privacy_title">PRIVACY POLICY & CONFIDENTIALITY</h3>
+        <p class="ar-cert-title" data-i18n="modal_privacy_ar_title">سياسة الخصوصية وحماية بيانات العملاء</p>
+      </div>
+
+      <div class="legal-modal-body">
+        <div class="legal-policy-badge" data-i18n="modal_privacy_badge">
+          🛡️ SAUDI PDPL COMPLIANT • حماية البيانات الشخصية
+        </div>
+
+        <div class="legal-policy-section">
+          <h4>1. Institutional Confidentiality (التزام السرية التامة)</h4>
+          <p>
+            RETHA Real Estate (شركة ريثا العقارية) operates under strict compliance with the Saudi Personal Data Protection Law (PDPL) and National Data Management Office (NDMO) standards. We guarantee total institutional discretion for high-net-worth acquisitions, royal and diplomatic estates, and private institutional investments.
+          </p>
+        </div>
+
+        <div class="legal-policy-section">
+          <h4>2. Data Collection & Purpose (جمع البيانات والأغراض)</h4>
+          <p>
+            Personal identity information collected via our confidential inquiry forms (including client name, telephone contact, email, and acquisition budget) is utilized exclusively for private consultation scheduling, verification dossier delivery, and regulatory compliance under the General Real Estate Authority (REGA).
+          </p>
+        </div>
+
+        <div class="legal-policy-section">
+          <h4>3. No Third-Party Disclosure (عدم مشاركة البيانات)</h4>
+          <p>
+            RETHA strictly prohibits the commercial sale, leasing, or unauthorized disclosure of client records. Verification interactions occur exclusively through official governmental escrow platforms, including authenticated Ministry of Justice (Najiz) electronic title deed conveyance and Wafi escrow accounts.
+          </p>
+        </div>
+
+        <div class="legal-policy-section">
+          <h4>4. Client Access & Statutory Rights (حقوق العميل)</h4>
+          <p>
+            Clients maintain permanent statutory rights to review, rectify, or request immediate expungement of their submitted data from our secure records at any time. For compliance inquiries, contact our legal desk at <a href="mailto:aqar.88riyadh@gmail.com" class="legal-contact-inline">aqar.88riyadh@gmail.com</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="cert-modal-footer">
+        <button type="button" class="btn-primary-luxury privacy-modal-close" style="min-width: 180px;">
+          <span data-i18n="modal_privacy_btn_close">Close & Acknowledge</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: SCHEDULE PRIVATE VIP VIEWING -->
+  <div id="schedule-viewing-modal" class="luxury-modal" role="dialog" aria-modal="true" aria-label="Schedule Private Viewing">
+    <div class="modal-backdrop scheduler-close-btn"></div>
+    <div class="modal-card-dialog">
+      <button class="modal-close-icon scheduler-close-btn" aria-label="Close modal">&times;</button>
+      
+      <div class="scheduler-modal-header">
+        <span class="luxury-badge gold" data-i18n="modal_sched_badge">◆ استشارة لكبار الشخصيات • VIP ADVISORY</span>
+        <h3 data-i18n="modal_sched_title">SCHEDULE CONFIDENTIAL SITE INSPECTION</h3>
+        <p id="schedule-prop-name" class="prop-target-name">Villa Al-Malqa Grand Residence</p>
+      </div>
+
+      <form id="schedule-viewing-form" class="viewing-form">
+        <div class="form-field">
+          <label for="viewing-name"><span data-i18n="modal_sched_name_lbl">Full Name / Entity</span> <span class="required">*</span></label>
+          <input type="text" id="viewing-name" placeholder="e.g. H.E. Mohammed Al-Sabhan" required />
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="viewing-phone"><span data-i18n="modal_sched_phone_lbl">Mobile / WhatsApp Number</span> <span class="required">*</span></label>
+            <input type="tel" id="viewing-phone" placeholder="+966 50 XXX XXXX" required />
+          </div>
+          <div class="form-field">
+            <label for="viewing-email"><span data-i18n="modal_sched_email_lbl">Email Address</span> <span class="required">*</span></label>
+            <input type="email" id="viewing-email" placeholder="name@domain.com" required />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label><span data-i18n="modal_sched_method_lbl">Preferred Contact Method</span> <span class="required">*</span></label>
+          <div class="contact-method-pills" id="viewing-contact-pills">
+            <button type="button" class="contact-pref-pill active" data-method="phone">
+              <span data-i18n="modal_sched_phone_pill">✆ Phone</span>
+            </button>
+            <button type="button" class="contact-pref-pill" data-method="whatsapp">
+              <span data-i18n="modal_sched_wa_pill">💬 WhatsApp</span>
+            </button>
+            <button type="button" class="contact-pref-pill" data-method="email">
+              <span data-i18n="modal_sched_email_pill">✉ Confidential Email</span>
+            </button>
+          </div>
+          <input type="hidden" id="viewing-contact-method" value="phone" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="viewing-date"><span data-i18n="modal_sched_date_lbl">Preferred Date</span> <span class="required">*</span></label>
+            <input type="date" id="viewing-date" required />
+          </div>
+          <div class="form-field">
+            <label for="viewing-time"><span data-i18n="modal_sched_time_lbl">Preferred Time Window</span> <span class="required">*</span></label>
+            <select id="viewing-time" required>
+              <option value="Morning (10:00 AM - 12:00 PM)">Morning (10:00 AM - 12:00 PM)</option>
+              <option value="Sunset / Golden Hour (4:30 PM - 6:30 PM)" selected>Sunset / Golden Hour (4:30 PM - 6:30 PM)</option>
+              <option value="Evening Twilight (7:00 PM - 9:00 PM)">Evening Twilight (7:00 PM - 9:00 PM)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="viewing-notes" data-i18n="modal_sched_notes_lbl">Special Security or Chauffeur Requirements</label>
+          <textarea id="viewing-notes" rows="2" data-i18n-placeholder="modal_sched_notes_ph" placeholder="e.g. Private chauffeur entrance required, discreet visit..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary-luxury full-width">
+          <span data-i18n="modal_sched_btn_submit">Confirm VIP Viewing Request</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </form>
+
+      <div id="schedule-success-box" class="schedule-success-card" style="display: none;">
+        <div class="success-icon">✓</div>
+        <h4 data-i18n="modal_sched_success_title">Viewing Confirmed & Prioritized</h4>
+        <p class="scheduled-details"></p>
+        <button class="btn-secondary-luxury scheduler-close-btn" data-i18n="modal_sched_done_btn">Done</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Real-time Property Status Toast Container -->
+  <div id="retha-toast-container" class="luxury-toast-container" aria-live="polite" role="region" aria-label="Real-time Property Notifications"></div>
+
+  <!-- Vite Entrypoint Script -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

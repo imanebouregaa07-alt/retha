@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RETHA REAL ESTATE — Admin Login</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/admin/admin.css" />
+  <script>
+    // Immediate redirect to /admin/ if needed or load app
+    if (!window.location.hash) {
+      window.location.replace('/admin/#login');
+    }
+  </script>
+</head>
+<body>
+  <div id="admin-app"></div>
+  <script type="module" src="/admin/admin.js"></script>
+</body>
+</html>

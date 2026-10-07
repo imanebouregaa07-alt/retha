@@ -1,0 +1,25 @@
+{
+  "name": "retha",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@techstark/opencv-js": "^5.0.0-release.1",
+    "ffmpeg-static": "^5.3.0",
+    "sharp": "^0.35.4",
+    "vite": "^8.3.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.117.2",
+    "gsap": "^3.15.0",
+    "leaflet": "^1.9.4",
+    "leaflet.markercluster": "^1.5.3",
+    "lucide": "^1.48.0",
+    "three": "^0.186.1"
+  }
+}
