@@ -33,94 +33,16 @@ Deno.serve(async (req: Request) => {
 
     if (action === "phone" || action === "call") {
       const cleanPhone = phone ? phone.replace(/[^0-9+]/g, "") : "";
-      const html = `<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>ريثا العقارية - اتصال بالعميل</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0c0f17; color: #fff; text-align: center; padding: 40px 20px; }
-    .card { max-width: 400px; margin: 0 auto; background: #161b26; border: 1px solid #d4af37; border-radius: 16px; padding: 30px; }
-    .title { color: #d4af37; font-size: 22px; margin-bottom: 12px; }
-    .phone { font-size: 24px; font-weight: bold; letter-spacing: 1px; color: #fff; margin: 20px 0; }
-    .btn { display: inline-block; background: #d4af37; color: #0c0f17; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 18px; margin-top: 10px; width: 80%; }
-  </style>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-</head>
-<body>
-  <div class="card">
-    <div class="title">ريثا للتسويق العقاري</div>
-    <p>جاري تحويلك للاتصال بالعميل...</p>
-    <div class="phone" dir="ltr">${cleanPhone}</div>
-   <a class="btn" href="#" onclick="Telegram.WebApp.openLink('tel:${cleanPhone}'); return false;">📞 اتصال الآن!</a>
-  </div>
-  <script>
-    document.addEventListener('click', function(e) {
-      const a = e.target.closest('a');
-      if (!a) return;
-      const href = a.getAttribute('href') || '';
-      if (href.startsWith('tel:') || href.startsWith('mailto:')) {
-        e.preventDefault();
-        window.open(href, '_system');
-      }
-    });
-  </script>
-</body>
-</html>`;
-      return new Response(html, {
-        status: 200,
-        headers: { 
-          "Content-Type": "text/html; charset=utf-8",
-          "X-Content-Type-Options": "nosniff"
-        }
+      return new Response(null, {
+        status: 302,
+        headers: { "Location": `tel:${cleanPhone || phone}` }
       });
     }
 
     if (action === "email") {
-      const html = `<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>ريثا العقارية - مراسلة العميل</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0c0f17; color: #fff; text-align: center; padding: 40px 20px; }
-    .card { max-width: 400px; margin: 0 auto; background: #161b26; border: 1px solid #d4af37; border-radius: 16px; padding: 30px; }
-    .title { color: #d4af37; font-size: 22px; margin-bottom: 12px; }
-    .email { font-size: 18px; font-weight: bold; color: #fff; margin: 20px 0; word-break: break-all; }
-    .btn { display: inline-block; background: #d4af37; color: #0c0f17; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 18px; margin-top: 10px; width: 80%; }
-  </style>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-</head>
-<body>
-  <div class="card">
-    <div class="title">ريثا للتسويق العقاري</div>
-    <p>جاري فتح تطبيق البريد لمراسلة العميل...</p>
-    <div class="email" dir="ltr">${email}</div>
-    <a class="btn" href="#" onclick="Telegram.WebApp.openLink('mailto:${email}'); return false;">✉️ مراسلة الآن!</a>
-  </div>
-  <script>
-    document.addEventListener('click', function(e) {
-      const a = e.target.closest('a');
-      if (!a) return;
-      const href = a.getAttribute('href') || '';
-      if (href.startsWith('tel:') || href.startsWith('mailto:')) {
-        e.preventDefault();
-        window.open(href, '_system');
-      }
-    });
-  </script>
-</body>
-</html>`;
-      return new Response(html, {
-        status: 200,
-        headers: { 
-          "Content-Type": "text/html; charset=utf-8",
-          "X-Content-Type-Options": "nosniff"
-        }
+      return new Response(null, {
+        status: 302,
+        headers: { "Location": `mailto:${email}` }
       });
     }
     return new Response(JSON.stringify({ ok: true, service: "retha-telegram-webhook" }), {

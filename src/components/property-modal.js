@@ -565,11 +565,17 @@ export class PropertyModal {
 
   syncThumbnails() {
     const thumbs = this.modalEl.querySelectorAll('.thumb-btn');
+    const ribbon = this.modalEl.querySelector('.photo-thumbnails-ribbon');
+
     thumbs.forEach((thumb, idx) => {
       const isActive = idx === this.activePhotoIndex;
       thumb.classList.toggle('active', isActive);
-      if (isActive) {
-        thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      if (isActive && ribbon) {
+        // Horizontally center the active thumbnail strictly within the ribbon container.
+        // Avoid using thumb.scrollIntoView() which forces vertical scrolling on parent
+        // containers (like modal-inner-container), pulling mobile users back to the top.
+        const scrollTarget = thumb.offsetLeft - (ribbon.clientWidth / 2) + (thumb.clientWidth / 2);
+        ribbon.scrollTo({ left: scrollTarget, behavior: 'smooth' });
       }
     });
 
